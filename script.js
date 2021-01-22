@@ -4,16 +4,22 @@ let explosions = [];
 let explosionLife = 100;
 let shootTimer = 0;
 let shotsPerSecond = 4;
-
+let friendlyMissiles = [];
+let gun = null
 
 function setup() {
     createCanvas(800, 500);
 
     player = createSprite(width / 2, height - 100, 20, 20);
     player.draw = DrawPlayer;
+
+    gun = createSprite(width / 2, height - 50, 25, 25);
 }
 
+
+
 function draw() {
+
     background(0, 0, 0);
 
     MovePlayer();
@@ -23,6 +29,14 @@ function draw() {
     drawSprites();
 }
 
+function createFriendlyMissiles() {
+    let startPosition = gun.position;
+    let endPosition = player.position;
+    let direction = p5.Vector.sub(endPosition, startPosition);
+    
+
+    let missile = createSprite(startPosition.x, startPosition.y, 5, 5);
+}
 function RemoveDeadExplosions() { 
     // kijk na of er nog explosies in de lijst zitten (lengte is groter dan 0)
     // EN kijk na of de eerste explosie in de lijst klaar is (life is gelijk aan 0)
